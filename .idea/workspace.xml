@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1a1fb23a-8a4f-4962-b2ee-05b525858d87" name="Changes" comment="petAdd">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Navalast&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Navalast/PetStoreAPI.git&quot;,
+    &quot;accountId&quot;: &quot;f7ea3361-c7ea-4cab-a2e4-ff6f6662235f&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2kC2qrObyLfoOZ2ytCOTWBmr1vv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TestNG.AllTest.executor": "Run",
+    "TestNG.PetAllTest.createPet (1).executor": "Run",
+    "TestNG.PetAllTest.createPet (2).executor": "Run",
+    "TestNG.PetAllTest.createPet.executor": "Run",
+    "TestNG.PetAllTest.deleteTest.executor": "Run",
+    "TestNG.PetAllTest.executor": "Run",
+    "TestNG.PetAllTest.getFindPetById.executor": "Run",
+    "TestNG.PetAllTest.postCreatePet.executor": "Run",
+    "TestNG.PetAllTest.postUpdatePet (1).executor": "Run",
+    "TestNG.PetAllTest.postUpdatePet (2).executor": "Run",
+    "TestNG.PetAllTest.postUpdatePet (3).executor": "Run",
+    "TestNG.PetAllTest.postUpdatePet (4).executor": "Run",
+    "TestNG.PetAllTest.postUpdatePet (5).executor": "Run",
+    "TestNG.PetAllTest.postUpdatePet.executor": "Run",
+    "TestNG.PetAllTest.putUpdatePet.executor": "Run",
+    "TestNG.PetAllTest.updatePet (1).executor": "Run",
+    "TestNG.PetAllTest.updatePet (2).executor": "Run",
+    "TestNG.PetAllTest.updatePet (3).executor": "Run",
+    "TestNG.PetAllTest.updatePet.executor": "Run",
+    "TestNG.UserAllTest.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Ланит курсы\Основы Java\PetStoreAPI\src\test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="TestNG.UserAllTest">
+    <configuration name="PetAllTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="PetStoreAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="petAPI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="petAPI" />
+      <option name="MAIN_CLASS_NAME" value="petAPI.PetAllTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetAllTest.deleteTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="PetStoreAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="petAPI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="petAPI" />
+      <option name="MAIN_CLASS_NAME" value="petAPI.PetAllTest" />
+      <option name="METHOD_NAME" value="deleteTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetAllTest.getFindPetById" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="PetStoreAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="petAPI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="petAPI" />
+      <option name="MAIN_CLASS_NAME" value="petAPI.PetAllTest" />
+      <option name="METHOD_NAME" value="getFindPetById" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PetAllTest.postCreatePet" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="PetStoreAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="petAPI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="petAPI" />
+      <option name="MAIN_CLASS_NAME" value="petAPI.PetAllTest" />
+      <option name="METHOD_NAME" value="postCreatePet" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserAllTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="PetStoreAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="userAPI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="userAPI" />
+      <option name="MAIN_CLASS_NAME" value="userAPI.UserAllTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.UserAllTest" />
+        <item itemvalue="TestNG.PetAllTest" />
+        <item itemvalue="TestNG.PetAllTest.deleteTest" />
+        <item itemvalue="TestNG.PetAllTest.postCreatePet" />
+        <item itemvalue="TestNG.PetAllTest.getFindPetById" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1a1fb23a-8a4f-4962-b2ee-05b525858d87" name="Changes" comment="" />
+      <created>1722773432000</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1722773432000</updated>
+    </task>
+    <task id="LOCAL-00001" summary="petAdd">
+      <option name="closed" value="true" />
+      <created>1722783257455</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722783257455</updated>
+    </task>
+    <task id="LOCAL-00002" summary="petAdd">
+      <option name="closed" value="true" />
+      <created>1722783266779</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722783266779</updated>
+    </task>
+    <task id="LOCAL-00003" summary="petAdd">
+      <option name="closed" value="true" />
+      <created>1722783308197</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722783308197</updated>
+    </task>
+    <task id="LOCAL-00004" summary="petAdd">
+      <option name="closed" value="true" />
+      <created>1722783326468</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722783326468</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="petAdd" />
+    <option name="LAST_COMMIT_MESSAGE" value="petAdd" />
+  </component>
+</project>
