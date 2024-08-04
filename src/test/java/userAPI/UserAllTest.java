@@ -1,46 +1,19 @@
+package userAPI;
+
+import confForTests.ResponseCode;
+import confForTests.Setup;
 import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.filter.log.LogDetail;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pojo.LoginUser;
-import pojo.GetUser;
-import pojo.UpdateUser;
-import pojo.User;
-import responseCode.ResponseCode;
-
-import java.io.IOException;
+import userAPI.pojo.GetUser;
+import userAPI.pojo.LoginUser;
+import userAPI.pojo.UpdateUser;
+import userAPI.pojo.User;
 
 import static io.restassured.RestAssured.given;
 
-public class AllTest {
-
-    @BeforeClass
-    public void setup() {
-        try {
-            System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
-        } catch (IOException e) {
-            throw new RuntimeException("Ошибка загрузки файла config.properties", e);
-        }
-
-        String baseUri = System.getProperty("base.uri");
-
-        if (baseUri == null || baseUri.isEmpty()) {
-            throw new RuntimeException("В файле \"config.properties\" отсутствует значение \"base.uri\"");
-        }
-
-        RestAssured.requestSpecification = new RequestSpecBuilder()
-                .setBaseUri(baseUri) // Задаем базовый URI для всех запросов
-                .setAccept(ContentType.JSON) // Задаем заголовок accept
-                .setContentType(ContentType.JSON) // Задаем заголовок content-type
-                .log(LogDetail.ALL) // Логгирование всех деталей запросов и ответов
-                .build();
-        RestAssured.filters(new ResponseLoggingFilter());
-    }
+public class UserAllTest extends Setup {
 
     @Test
     public void createUserTest() {

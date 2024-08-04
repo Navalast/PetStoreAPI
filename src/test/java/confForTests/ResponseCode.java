@@ -1,4 +1,4 @@
-package responseCode;
+package confForTests;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;

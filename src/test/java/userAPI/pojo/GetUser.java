@@ -1,4 +1,4 @@
-package pojo;
+package userAPI.pojo;
 
 public class GetUser {
     private String username;

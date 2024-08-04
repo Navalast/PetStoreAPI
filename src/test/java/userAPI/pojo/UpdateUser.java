@@ -1,8 +1,7 @@
-package pojo;
+package userAPI.pojo;
 
-public class User {
+public class UpdateUser extends GetUser {
     private Integer id;
-    private String username;
     private String firstName;
     private String lastName;
     private String email;
@@ -10,9 +9,9 @@ public class User {
     private String phone;
     private Integer userStatus;
 
-    public User(Integer id, String username, String firstName, String lastName, String email, String password, String phone, Integer userStatus) {
+    public UpdateUser(String username, Integer id, String firstName, String lastName, String email, String password, String phone, Integer userStatus) {
+        super(username);
         this.id = id;
-        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -23,10 +22,6 @@ public class User {
 
     public Integer getId() {
         return id;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public String getFirstName() {
