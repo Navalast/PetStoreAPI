@@ -1,20 +1,14 @@
 package petAPI;
 
+import confForTests.ResponseCode;
 import confForTests.Setup;
 import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.filter.log.LogDetail;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import petAPI.pojo.Pet;
 import petAPI.pojo.UpdatePet;
 import petAPI.pojo.UpdateResponse;
-import confForTests.ResponseCode;
 
-import java.io.IOException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
