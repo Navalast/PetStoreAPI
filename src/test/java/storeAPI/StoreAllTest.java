@@ -51,17 +51,6 @@ public class StoreAllTest extends Setup {
     }
 
     @Test(priority = 3)
-    public void deleteTest() {
-        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
-
-        DeleteResponse response = given()
-                .when()
-                .delete("/store/order/" + firstOrder.getId())
-                .then()
-                .extract().body().as(DeleteResponse.class);
-    }
-
-    @Test(priority = 4)
     public void getOrderInventory() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -70,5 +59,16 @@ public class StoreAllTest extends Setup {
                 .get("/store/inventory")
                 .then()
                 .extract().response();
+    }
+
+    @Test(priority = 4)
+    public void deleteTest() {
+        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
+
+        DeleteResponse response = given()
+                .when()
+                .delete("/store/order/" + firstOrder.getId())
+                .then()
+                .extract().body().as(DeleteResponse.class);
     }
 }

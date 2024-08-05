@@ -57,7 +57,7 @@ public class PetAllTest extends Setup {
 
         Pet pet = given()
                 .when()
-                .get("/pet/10")
+                .get("/pet/" + dogVictor.getId())
                 .then()
                 .extract().body().as(Pet.class);
 
@@ -96,7 +96,7 @@ public class PetAllTest extends Setup {
                 .body(update)
                 .contentType("application/x-www-form-urlencoded")
                 .when()
-                .post("/pet/10")
+                .post("/pet/" + dogVictor.getId())
                 .then()
                 .extract().body().as(UpdateResponse.class);
 
