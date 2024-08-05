@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import petAPI.pojo.Pet;
 import petAPI.pojo.UpdatePet;
 import petAPI.pojo.UpdateResponse;
-import petAPI.pojo.createObj.CreatePet;
+import petAPI.createObj.CreatePet;
 
 import java.util.List;
 
