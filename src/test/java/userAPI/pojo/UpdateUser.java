@@ -1,5 +1,8 @@
 package userAPI.pojo;
 
+import lombok.Getter;
+
+@Getter
 public class UpdateUser extends GetUser {
     private Integer id;
     private String firstName;
@@ -18,33 +21,5 @@ public class UpdateUser extends GetUser {
         this.password = password;
         this.phone = phone;
         this.userStatus = userStatus;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public Integer getUserStatus() {
-        return userStatus;
     }
 }

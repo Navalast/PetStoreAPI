@@ -1,7 +1,10 @@
 package petAPI.pojo;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class Pet {
     private Integer id;
     private Category category;
@@ -19,27 +22,4 @@ public class Pet {
         this.tags = tags;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<String> getPhotoUrls() {
-        return photoUrls;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public List<Tag> getTags() {
-        return tags;
-    }
 }
