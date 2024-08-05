@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class UserAllTest extends Setup {
 
-    private User userVictor = CreateUser.createUserObject(10, "Krasavec", "Tony", "Krasavkovich", "mail@mail.ru",
+    private User userVictor = new User(10, "Krasavec", "Tony", "Krasavkovich", "mail@mail.ru",
             "2225", "98316516", 1);
 
     @Test(priority = 1)

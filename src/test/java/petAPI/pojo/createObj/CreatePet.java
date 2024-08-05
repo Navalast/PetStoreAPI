@@ -1,4 +1,4 @@
-package petAPI;
+package petAPI.pojo.createObj;
 
 import petAPI.pojo.Category;
 import petAPI.pojo.Pet;

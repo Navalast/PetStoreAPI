@@ -21,5 +21,4 @@ public class Pet {
         this.status = status;
         this.tags = tags;
     }
-
 }
