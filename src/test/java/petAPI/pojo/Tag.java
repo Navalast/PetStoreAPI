@@ -1,11 +1,15 @@
 package petAPI.pojo;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Getter;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
 @Getter
-@AllArgsConstructor
+@Builder
+@JsonInclude(NON_NULL)
 public class Tag {
-    private Integer id;
-    private String name;
+    Integer id;
+    String name;
 }

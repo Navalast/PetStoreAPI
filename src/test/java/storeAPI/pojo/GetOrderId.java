@@ -1,4 +1,4 @@
-package petAPI.pojo;
+package storeAPI.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Getter
 @Builder
 @JsonInclude(NON_NULL)
-public class Category {
-    Integer id;
-    String name;
+public class GetOrderId {
+    Integer orderId;
 }

@@ -1,12 +1,16 @@
 package petAPI.pojo;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Getter;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
 @Getter
-@AllArgsConstructor
+@Builder
+@JsonInclude(NON_NULL)
 public class UpdatePet {
-    private Integer id;
-    private String name;
-    private String status;
+    Integer id;
+    String name;
+    String status;
 }

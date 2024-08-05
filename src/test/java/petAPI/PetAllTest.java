@@ -5,10 +5,7 @@ import confForTests.Setup;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import petAPI.pojo.Pet;
-import petAPI.pojo.UpdatePet;
-import petAPI.pojo.UpdateResponse;
-import petAPI.createObj.CreatePet;
+import petAPI.pojo.*;
 
 import java.util.List;
 
@@ -17,8 +14,24 @@ import static org.testng.Assert.assertEquals;
 
 public class PetAllTest extends Setup {
 
-    private Pet dogVictor = CreatePet.createPetObject(1, "BigDog", 2, "GoodBoy", 10, "Victor",
-            List.of("link1", "link2"), "sleep");
+    private final Pet dogVictor = Pet.builder()
+            .id(10)
+            .category(Category.builder()
+                    .id(2)
+                    .name("BigDog")
+                    .build())
+            .name("Victor")
+            .photoUrls(List.of("Link1", "Link2"))
+            .tags(List.of(Tag.builder()
+                    .id(3)
+                    .name("firstTag")
+                    .build(),
+                    Tag.builder()
+                            .id(4)
+                            .name("secondTag")
+                            .build()))
+            .status("sleep")
+            .build();
 
     @Test(priority = 1)
     public void postCreatePet() {
@@ -73,7 +86,11 @@ public class PetAllTest extends Setup {
     @Test(priority = 4)
     public void postUpdatePet() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
-        UpdatePet update = new UpdatePet(10, "Alex", "sleep");
+        UpdatePet update = UpdatePet.builder()
+                .id(10)
+                .name("Alex")
+                .status("sleep")
+                .build();
 
         UpdateResponse pet = given()
                 .body(update)

@@ -1,4 +1,4 @@
-package petAPI.pojo;
+package storeAPI.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -6,10 +6,11 @@ import lombok.Getter;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
+@JsonInclude(NON_NULL)
 @Getter
 @Builder
-@JsonInclude(NON_NULL)
-public class Category {
-    Integer id;
-    String name;
+public class DeleteResponse {
+    Integer code;
+    String type;
+    String message;
 }
