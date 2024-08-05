@@ -19,7 +19,7 @@ public class PetAllTest extends Setup {
     private Pet dogVictor = CreatePet.createPetObject(1, "BigDog", 2, "GoodBoy", 10, "Victor",
             List.of("link1", "link2"), "sleep");
 
-    @Test
+    @Test(priority = 1)
     public void postCreatePet() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -37,7 +37,7 @@ public class PetAllTest extends Setup {
         assertEquals(createdPet.getStatus(), dogVictor.getStatus());
     }
 
-    @Test(dependsOnMethods = "postCreatePet")
+    @Test(priority = 2)
     public void getFindPetById() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -52,7 +52,7 @@ public class PetAllTest extends Setup {
         assertEquals(pet.getStatus(), "sleep");
     }
 
-    @Test(dependsOnMethods = "getFindPetById")
+    @Test(priority = 3)
     public void putUpdatePet() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -69,7 +69,7 @@ public class PetAllTest extends Setup {
 
     }
 
-    @Test(dependsOnMethods = "putUpdatePet")
+    @Test(priority = 4)
     public void postUpdatePet() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
         UpdatePet update = new UpdatePet(10, "Alex", "sleep");
@@ -85,7 +85,7 @@ public class PetAllTest extends Setup {
         assertEquals(pet.getMessage(), update.getId().toString());
     }
 
-    @Test(dependsOnMethods = "postUpdatePet")
+    @Test(priority = 5)
     public void deleteTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 

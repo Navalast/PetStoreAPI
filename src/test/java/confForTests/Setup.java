@@ -31,6 +31,5 @@ public class Setup {
                 .log(LogDetail.ALL) // Логгирование всех деталей запросов и ответов
                 .build();
         RestAssured.filters(new ResponseLoggingFilter());
-
     }
 }
