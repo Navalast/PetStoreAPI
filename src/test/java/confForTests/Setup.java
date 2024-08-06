@@ -10,8 +10,10 @@ import org.testng.annotations.BeforeClass;
 import java.io.IOException;
 
 public class Setup {
+
     @BeforeClass
     public void setup() {
+
         try {
             System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
         } catch (IOException e) {

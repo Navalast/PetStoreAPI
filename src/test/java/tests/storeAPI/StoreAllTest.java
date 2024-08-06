@@ -1,15 +1,14 @@
-package storeAPI;
+package tests.storeAPI;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import confForTests.ResponseCode;
 import confForTests.Setup;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import storeAPI.pojo.DeleteResponse;
-import storeAPI.pojo.Order;
+import pojo.storePojo.DeleteResponsePOJO;
+import pojo.storePojo.OrderPOJO;
 
 import java.util.Date;
 
@@ -19,7 +18,7 @@ public class StoreAllTest extends Setup {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
     private Date date;
 
-    private final Order firstOrder = Order.builder()
+    private final OrderPOJO firstOrder = OrderPOJO.builder()
             .id(10)
             .petId(4)
             .quantity(4)
@@ -32,12 +31,12 @@ public class StoreAllTest extends Setup {
     public void postStoreTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        Order response = given()
+        OrderPOJO response = given()
                 .body(firstOrder)
                 .when()
                 .post("/store/order/")
                 .then()
-                .extract().as(Order.class);
+                .extract().as(OrderPOJO.class);
 
         Assert.assertNotNull(response);
         Assert.assertEquals(firstOrder.getId(), response.getId());
@@ -47,11 +46,11 @@ public class StoreAllTest extends Setup {
     public void getOrderOnId() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        Order response = given()
+        OrderPOJO response = given()
                 .when()
                 .get("/store/order/" + firstOrder.getId())
                 .then()
-                .extract().body().as(Order.class);
+                .extract().body().as(OrderPOJO.class);
 
         Assert.assertNotNull(response);
         Assert.assertEquals(firstOrder.getId(), response.getId());
@@ -75,11 +74,11 @@ public class StoreAllTest extends Setup {
     public void deleteTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        DeleteResponse response = given()
+        DeleteResponsePOJO response = given()
                 .when()
                 .delete("/store/order/" + firstOrder.getId())
                 .then()
-                .extract().body().as(DeleteResponse.class);
+                .extract().body().as(DeleteResponsePOJO.class);
 
         Assert.assertNotNull(response);
         Assert.assertEquals(response.getMessage(), "10");

@@ -1,15 +1,22 @@
-package petAPI.pojo;
+package pojo.storePojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Date;
+
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
+@JsonInclude(NON_NULL)
 @Getter
 @Builder
-@JsonInclude(NON_NULL)
-public class Tag {
+public class OrderPOJO {
+
     Integer id;
-    String name;
+    Integer petId;
+    Integer quantity;
+    Date shipDate;
+    String status;
+    Boolean complete;
 }

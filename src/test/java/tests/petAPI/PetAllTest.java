@@ -1,11 +1,11 @@
-package petAPI;
+package tests.petAPI;
 
 import confForTests.ResponseCode;
 import confForTests.Setup;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import petAPI.pojo.*;
+import pojo.petPojo.*;
 
 import java.util.List;
 
@@ -14,19 +14,19 @@ import static org.testng.Assert.assertEquals;
 
 public class PetAllTest extends Setup {
 
-    private final Pet dogVictor = Pet.builder()
+    private final PetPOJO dogVictor = PetPOJO.builder()
             .id(10)
-            .category(Category.builder()
+            .category(CategoryPOJO.builder()
                     .id(2)
                     .name("BigDog")
                     .build())
             .name("Victor")
             .photoUrls(List.of("Link1", "Link2"))
-            .tags(List.of(Tag.builder()
+            .tags(List.of(TagPOJO.builder()
                     .id(3)
                     .name("firstTag")
                     .build(),
-                    Tag.builder()
+                    TagPOJO.builder()
                             .id(4)
                             .name("secondTag")
                             .build()))
@@ -44,7 +44,7 @@ public class PetAllTest extends Setup {
                 .then()
                 .extract().response();
 
-        Pet createdPet = response.getBody().as(Pet.class);
+        PetPOJO createdPet = response.getBody().as(PetPOJO.class);
 
         assertEquals(createdPet.getId(), dogVictor.getId());
         assertEquals(createdPet.getName(), dogVictor.getName());
@@ -55,11 +55,11 @@ public class PetAllTest extends Setup {
     public void getFindPetById() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        Pet pet = given()
+        PetPOJO pet = given()
                 .when()
                 .get("/pet/" + dogVictor.getId())
                 .then()
-                .extract().body().as(Pet.class);
+                .extract().body().as(PetPOJO.class);
 
         assertEquals(pet.getId().intValue(), 10);
         assertEquals(pet.getName(), "Victor");
@@ -70,12 +70,12 @@ public class PetAllTest extends Setup {
     public void putUpdatePet() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        Pet pet = given()
+        PetPOJO pet = given()
                 .body(dogVictor)
                 .when()
                 .put("/pet")
                 .then()
-                .extract().body().as(Pet.class);
+                .extract().body().as(PetPOJO.class);
 
         assertEquals(pet.getId(), dogVictor.getId());
         assertEquals(pet.getName(), dogVictor.getName());
@@ -86,19 +86,19 @@ public class PetAllTest extends Setup {
     @Test(priority = 4)
     public void postUpdatePet() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
-        UpdatePet update = UpdatePet.builder()
+        UpdatePetPOJO update = UpdatePetPOJO.builder()
                 .id(10)
                 .name("Alex")
                 .status("sleep")
                 .build();
 
-        UpdateResponse pet = given()
+        UpdateResponsePOJO pet = given()
                 .body(update)
                 .contentType("application/x-www-form-urlencoded")
                 .when()
                 .post("/pet/" + dogVictor.getId())
                 .then()
-                .extract().body().as(UpdateResponse.class);
+                .extract().body().as(UpdateResponsePOJO.class);
 
         assertEquals(pet.getMessage(), update.getId().toString());
     }
@@ -107,11 +107,11 @@ public class PetAllTest extends Setup {
     public void deleteTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        UpdateResponse delete = given()
+        UpdateResponsePOJO delete = given()
                 .when()
                 .delete("/pet/" + dogVictor.getId())
                 .then()
-                .extract().body().as(UpdateResponse.class);
+                .extract().body().as(UpdateResponsePOJO.class);
 
         assertEquals(delete.getMessage(), dogVictor.getId().toString());
     }

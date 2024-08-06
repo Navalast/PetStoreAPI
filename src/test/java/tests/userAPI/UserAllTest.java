@@ -1,4 +1,4 @@
-package userAPI;
+package tests.userAPI;
 
 import confForTests.ResponseCode;
 import confForTests.Setup;
@@ -6,25 +6,25 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import userAPI.pojo.*;
+import pojo.userPojo.*;
 
 import static io.restassured.RestAssured.given;
 
 public class UserAllTest extends Setup {
 
-    private User userVictor = new User(10, "Krasavec", "Tony", "Krasavkovich", "mail@mail.ru",
+    private UserPOJO userVictor = new UserPOJO(10, "Krasavec", "Tony", "Krasavkovich", "mail@mail.ru",
             "2225", "98316516", 1);
 
     @Test(priority = 1)
     public void createUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        UserResponseBody response = given()
+        UserResponseBodyPOJO response = given()
                 .body(userVictor)
                 .when()
                 .post("/user")
                 .then()
-                .extract().as(UserResponseBody.class);
+                .extract().as(UserResponseBodyPOJO.class);
 
         Assert.assertNotNull(response);
     }
@@ -33,13 +33,13 @@ public class UserAllTest extends Setup {
     public void getUserLoginTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        LoginUser user = new LoginUser(userVictor.getUsername(), userVictor.getPassword());
-        UserResponseBody response = given()
+        LoginUserPOJO user = new LoginUserPOJO(userVictor.getUsername(), userVictor.getPassword());
+        UserResponseBodyPOJO response = given()
                 .body(user)
                 .when()
                 .get("/user/login")
                 .then()
-                .extract().as(UserResponseBody.class);
+                .extract().as(UserResponseBodyPOJO.class);
 
         Assert.assertNotNull(response);
         Assert.assertEquals(user.getUsername(), userVictor.getUsername());
@@ -49,13 +49,13 @@ public class UserAllTest extends Setup {
     public void getUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        GetUser getUser = new GetUser(userVictor.getUsername());
-        User response = given()
+        GetUserPOJO getUser = new GetUserPOJO(userVictor.getUsername());
+        UserPOJO response = given()
                 .body(getUser)
                 .when()
                 .get("/user/" + getUser.getUsername())
                 .then()
-                .extract().as(User.class);
+                .extract().as(UserPOJO.class);
 
         Assert.assertEquals(response.getUsername(), getUser.getUsername());
     }
@@ -64,15 +64,15 @@ public class UserAllTest extends Setup {
     public void updateUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        UpdateUser updateUser = new UpdateUser(userVictor.getUsername(), userVictor.getId(), "Tony228", userVictor.getLastName(), userVictor.getEmail(),
+        UpdateUserPOJO updateUser = new UpdateUserPOJO(userVictor.getUsername(), userVictor.getId(), "Tony228", userVictor.getLastName(), userVictor.getEmail(),
                 userVictor.getPassword(), userVictor.getPhone(), userVictor.getUserStatus());
 
-        UserResponseBody response = given()
+        UserResponseBodyPOJO response = given()
                 .body(updateUser)
                 .when()
                 .put("/user/" + updateUser.getUsername())
                 .then()
-                .extract().as(UserResponseBody.class);
+                .extract().as(UserResponseBodyPOJO.class);
 
         Assert.assertNotNull(response);
         Assert.assertNotSame(updateUser.getFirstName(), userVictor.getFirstName());
@@ -82,7 +82,7 @@ public class UserAllTest extends Setup {
     public void deleteUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        LoginUser user = new LoginUser(userVictor.getUsername(), userVictor.getPassword());
+        LoginUserPOJO user = new LoginUserPOJO(userVictor.getUsername(), userVictor.getPassword());
 
         Response response = given()
                 .when()

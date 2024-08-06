@@ -1,4 +1,4 @@
-package storeAPI.pojo;
+package pojo.storePojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonInclude(NON_NULL)
 @Getter
 @Builder
-public class DeleteResponse {
+public class DeleteResponsePOJO {
+
     Integer code;
     String type;
     String message;

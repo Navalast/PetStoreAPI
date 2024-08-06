@@ -1,10 +1,11 @@
-package userAPI.pojo;
+package pojo.userPojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class GetUser {
+public class GetUserPOJO {
+
     private String username;
 }

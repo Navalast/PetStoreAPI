@@ -1,4 +1,4 @@
-package storeAPI.pojo;
+package pojo.petPojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -9,6 +9,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Getter
 @Builder
 @JsonInclude(NON_NULL)
-public class GetOrderId {
-    Integer orderId;
+public class TagPOJO {
+
+    Integer id;
+    String name;
 }

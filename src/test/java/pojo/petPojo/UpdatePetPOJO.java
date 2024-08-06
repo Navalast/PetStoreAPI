@@ -1,4 +1,4 @@
-package petAPI.pojo;
+package pojo.petPojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Getter
 @Builder
 @JsonInclude(NON_NULL)
-public class UpdateResponse {
-    Integer code;
-    String type;
-    String message;
+public class UpdatePetPOJO {
+
+    Integer id;
+    String name;
+    String status;
 }
