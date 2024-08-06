@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import confForTests.ResponseCode;
 import confForTests.Setup;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import storeAPI.pojo.DeleteResponse;
 import storeAPI.pojo.Order;
@@ -37,6 +39,8 @@ public class StoreAllTest extends Setup {
                 .then()
                 .extract().as(Order.class);
 
+        Assert.assertNotNull(response);
+        Assert.assertEquals(firstOrder.getId(), response.getId());
     }
 
     @Test(priority = 2)
@@ -48,6 +52,10 @@ public class StoreAllTest extends Setup {
                 .get("/store/order/" + firstOrder.getId())
                 .then()
                 .extract().body().as(Order.class);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(firstOrder.getId(), response.getId());
+        Assert.assertEquals(firstOrder.getPetId(), response.getPetId());
     }
 
     @Test(priority = 3)
@@ -59,6 +67,8 @@ public class StoreAllTest extends Setup {
                 .get("/store/inventory")
                 .then()
                 .extract().response();
+
+        Assert.assertNotNull(response);
     }
 
     @Test(priority = 4)
@@ -70,5 +80,8 @@ public class StoreAllTest extends Setup {
                 .delete("/store/order/" + firstOrder.getId())
                 .then()
                 .extract().body().as(DeleteResponse.class);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(response.getMessage(), "10");
     }
 }
