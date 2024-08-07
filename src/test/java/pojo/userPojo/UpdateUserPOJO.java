@@ -1,8 +1,20 @@
 package pojo.userPojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
+@EqualsAndHashCode(callSuper = true)
 @Getter
+@SuperBuilder
+@JsonInclude(NON_NULL)
+@Data
+@NoArgsConstructor
 public class UpdateUserPOJO extends GetUserPOJO {
 
     Integer id;
@@ -12,16 +24,4 @@ public class UpdateUserPOJO extends GetUserPOJO {
     String password;
     String phone;
     Integer userStatus;
-
-    public UpdateUserPOJO(String username, Integer id, String firstName, String lastName, String email, String password, String phone, Integer userStatus) {
-
-        super(username);
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.userStatus = userStatus;
-    }
 }

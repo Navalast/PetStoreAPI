@@ -1,10 +1,15 @@
 package pojo.userPojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
 @Getter
-@AllArgsConstructor
+@Builder
+@JsonInclude(NON_NULL)
 public class UserPOJO {
 
     Integer id;

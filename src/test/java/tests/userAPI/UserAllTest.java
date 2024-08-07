@@ -12,15 +12,23 @@ import static java.lang.String.format;
 
 public class UserAllTest extends Setup {
 
-    private final UserPOJO userVictor = new UserPOJO(121, "Krasavec", "Tony", "Krasavkovich", "mail@mail.ru",
-            "2225", "98316516", 1);
+    private final UserPOJO userTony = UserPOJO.builder()
+            .id(121)
+            .username("Krasavec")
+            .firstName("Tony")
+            .lastName("Krasavkovich")
+            .email("mail@mail.ru")
+            .password("2225")
+            .phone("98316516")
+            .userStatus(21)
+            .build();
 
     @Test(priority = 1)
     public void createUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
         UserResponseBodyPOJO response = given()
-                .body(userVictor)
+                .body(userTony)
                 .when()
                 .post("/user")
                 .then()
@@ -28,17 +36,20 @@ public class UserAllTest extends Setup {
 
         Assert.assertNotNull(response);
 
-        Assert.assertTrue(response.getMessage().contains(userVictor.getId().toString()));
+        Assert.assertTrue(response.getMessage().contains(userTony.getId().toString()));
     }
 
     @Test(priority = 2)
     public void getUserLoginTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        LoginUserPOJO user = new LoginUserPOJO(userVictor.getUsername(), userVictor.getPassword());
+        LoginUserPOJO user = LoginUserPOJO.builder()
+                .username(userTony.getUsername())
+                .password(userTony.getPassword())
+                .build();
 
-        Assert.assertEquals(user.getUsername(), userVictor.getUsername());
-        Assert.assertEquals(user.getPassword(), userVictor.getPassword());
+        Assert.assertEquals(user.getUsername(), userTony.getUsername());
+        Assert.assertEquals(user.getPassword(), userTony.getPassword());
 
         UserResponseBodyPOJO response = given()
                 .body(user)
@@ -55,9 +66,11 @@ public class UserAllTest extends Setup {
     public void getUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        GetUserPOJO getUser = new GetUserPOJO(userVictor.getUsername());
+        GetUserPOJO getUser = GetUserPOJO.builder()
+                .username(userTony.getUsername())
+                .build();
 
-        Assert.assertEquals(getUser.getUsername(), userVictor.getUsername());
+        Assert.assertEquals(getUser.getUsername(), userTony.getUsername());
 
         UserPOJO response = given()
                 .body(getUser)
@@ -74,8 +87,16 @@ public class UserAllTest extends Setup {
     public void updateUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        UpdateUserPOJO updateUser = new UpdateUserPOJO(userVictor.getUsername(), userVictor.getId(), "Tony228", userVictor.getLastName(), userVictor.getEmail(),
-                userVictor.getPassword(), userVictor.getPhone(), userVictor.getUserStatus());
+        UpdateUserPOJO updateUser = UpdateUserPOJO.builder()
+                .username(userTony.getUsername())
+                .id(userTony.getId())
+                .firstName("Tony228")
+                .lastName(userTony.getLastName())
+                .email(userTony.getEmail())
+                .password(userTony.getPassword())
+                .phone(userTony.getPhone())
+                .userStatus(userTony.getUserStatus())
+                .build();
 
         UserResponseBodyPOJO response = given()
                 .body(updateUser)
@@ -85,17 +106,20 @@ public class UserAllTest extends Setup {
                 .extract().as(UserResponseBodyPOJO.class);
 
         Assert.assertNotNull(response);
-        Assert.assertNotSame(updateUser.getFirstName(), userVictor.getFirstName());
+        Assert.assertNotSame(updateUser.getFirstName(), userTony.getFirstName());
     }
 
     @Test(priority = 5)
     public void deleteUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        LoginUserPOJO user = new LoginUserPOJO(userVictor.getUsername(), userVictor.getPassword());
+        LoginUserPOJO user = LoginUserPOJO.builder()
+                .username(userTony.getUsername())
+                .password(userTony.getPassword())
+                .build();
 
-        Assert.assertEquals(user.getUsername(), userVictor.getUsername());
-        Assert.assertEquals(user.getPassword(), userVictor.getPassword());
+        Assert.assertEquals(user.getUsername(), userTony.getUsername());
+        Assert.assertEquals(user.getPassword(), userTony.getPassword());
 
         UserResponseBodyPOJO response = given()
                 .when()
