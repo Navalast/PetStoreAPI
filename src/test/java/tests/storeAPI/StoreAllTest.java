@@ -43,7 +43,7 @@ public class StoreAllTest extends Setup {
     }
 
     @Test(priority = 2)
-    public void getOrderOnId() {
+    public void getOrderOnIdTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
         OrderPOJO response = given()
@@ -58,7 +58,7 @@ public class StoreAllTest extends Setup {
     }
 
     @Test(priority = 3)
-    public void getOrderInventory() {
+    public void getOrderInventoryTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
         Response response = given()

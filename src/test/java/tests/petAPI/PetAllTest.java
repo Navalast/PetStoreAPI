@@ -4,9 +4,11 @@ import confForTests.ResponseCode;
 import confForTests.Setup;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pojo.petPojo.*;
 
+import java.io.File;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -34,25 +36,48 @@ public class PetAllTest extends Setup {
             .build();
 
     @Test(priority = 1)
-    public void postCreatePet() {
+    public void postCreatePetTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        Response response = given()
+        PetPOJO response = given()
                 .body(dogVictor)
                 .when()
                 .post("/pet")
                 .then()
-                .extract().response();
+                .extract().as(PetPOJO.class);
 
-        PetPOJO createdPet = response.getBody().as(PetPOJO.class);
-
-        assertEquals(createdPet.getId(), dogVictor.getId());
-        assertEquals(createdPet.getName(), dogVictor.getName());
-        assertEquals(createdPet.getStatus(), dogVictor.getStatus());
+        assertEquals(response.getId(), dogVictor.getId());
+        assertEquals(response.getName(), dogVictor.getName());
+        assertEquals(response.getStatus(), dogVictor.getStatus());
     }
 
     @Test(priority = 2)
-    public void getFindPetById() {
+    public void postUploadImageTest() {
+        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
+
+        File file = new File("src/test/resources/photo/images.png");
+        UploadImagePOJO uploadImage = UploadImagePOJO.builder()
+                .petId(dogVictor.getId())
+                .additionalMetadata("Some data")
+                .file(file)
+                .build();
+
+        UpdateResponsePOJO response = given()
+                .contentType("multipart/form-data")
+                .multiPart("file", uploadImage.getFile())
+                .formParam("additionalMetadata", uploadImage.getAdditionalMetadata())
+                .when()
+                .post("/pet/" + uploadImage.getPetId() + "/uploadImage")
+                .then()
+                .extract().as(UpdateResponsePOJO.class);
+
+        assertEquals(uploadImage.getPetId(), dogVictor.getId());
+        Assert.assertNotNull(response);
+
+    }
+
+    @Test(priority = 3)
+    public void getFindPetByIdTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
         PetPOJO pet = given()
@@ -66,8 +91,8 @@ public class PetAllTest extends Setup {
         assertEquals(pet.getStatus(), "sleep");
     }
 
-    @Test(priority = 3)
-    public void putUpdatePet() {
+    @Test(priority = 4)
+    public void putUpdatePetTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
         PetPOJO pet = given()
@@ -83,8 +108,8 @@ public class PetAllTest extends Setup {
 
     }
 
-    @Test(priority = 4)
-    public void postUpdatePet() {
+    @Test(priority = 5)
+    public void postUpdatePetTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
         UpdatePetPOJO update = UpdatePetPOJO.builder()
                 .id(10)
@@ -103,7 +128,7 @@ public class PetAllTest extends Setup {
         assertEquals(pet.getMessage(), update.getId().toString());
     }
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void deleteTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
