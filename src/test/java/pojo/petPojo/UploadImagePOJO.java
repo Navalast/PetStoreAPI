@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.io.File;
+import java.math.BigInteger;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
@@ -13,7 +14,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonInclude(NON_NULL)
 public class UploadImagePOJO {
 
-    Integer petId;
+    BigInteger petId;
     String additionalMetadata;
     File file;
 }

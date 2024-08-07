@@ -2,14 +2,20 @@ package tests.petAPI;
 
 import confForTests.ResponseCode;
 import confForTests.Setup;
+import enumStatus.StatusEnum;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pojo.petPojo.*;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static enumStatus.StatusEnum.*;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
@@ -17,7 +23,7 @@ import static org.testng.Assert.assertEquals;
 public class PetAllTest extends Setup {
 
     private final PetPOJO dogVictor = PetPOJO.builder()
-            .id(121)
+            .id(BigInteger.valueOf(121))
             .category(CategoryPOJO.builder()
                     .id(2)
                     .name("BigDog")
@@ -32,7 +38,7 @@ public class PetAllTest extends Setup {
                             .id(4)
                             .name("secondTag")
                             .build()))
-            .status("sleep")
+            .status(String.valueOf(available))
             .build();
 
     @Test(priority = 1)
@@ -112,6 +118,7 @@ public class PetAllTest extends Setup {
     @Test(priority = 5)
     public void postUpdatePetTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
+
         UpdatePetPOJO update = UpdatePetPOJO.builder()
                 .id(121)
                 .name("Alex")
@@ -127,6 +134,22 @@ public class PetAllTest extends Setup {
                 .extract().body().as(UpdateResponsePOJO.class);
 
         assertEquals(pet.getMessage(), update.getId().toString());
+    }
+
+    @Test
+    public void getPetFindByStatusTest() {
+        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
+
+        List<StatusEnum> listOfStatus = Stream.of(available, pending, sold)
+                .collect(Collectors.toCollection(LinkedList::new));
+
+        List<PetPOJO> response = given()
+                .when()
+                .get(format("/pet/findByStatus?status=%s", listOfStatus.get(0).toString()))
+                .then()
+                .extract().body().jsonPath().getList(".", PetPOJO.class);
+
+        response.forEach(pet -> assertEquals(pet.getStatus(), listOfStatus.get(0).toString().toLowerCase()));
     }
 
     @Test(priority = 6)
