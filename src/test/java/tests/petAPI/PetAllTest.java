@@ -65,6 +65,7 @@ public class PetAllTest extends Setup {
         UpdateResponsePOJO response = given()
                 .contentType("multipart/form-data")
                 .multiPart("file", uploadImage.getFile())
+                .formParam("additionalMetadata", uploadImage.getAdditionalMetadata())
                 .when()
                 .post("/pet/" + uploadImage.getPetId() + "/uploadImage")
                 .then()
@@ -72,6 +73,7 @@ public class PetAllTest extends Setup {
 
         assertEquals(uploadImage.getPetId(), dogVictor.getId());
         Assert.assertNotNull(response);
+        Assert.assertTrue(response.getMessage().contains(uploadImage.getAdditionalMetadata()));
 
     }
 
