@@ -7,5 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetUserPOJO {
 
-    private String username;
+    String username;
 }
