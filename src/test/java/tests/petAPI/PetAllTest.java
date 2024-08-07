@@ -3,7 +3,6 @@ package tests.petAPI;
 import confForTests.ResponseCode;
 import confForTests.Setup;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pojo.petPojo.*;
@@ -12,6 +11,7 @@ import java.io.File;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
 public class PetAllTest extends Setup {
@@ -62,19 +62,19 @@ public class PetAllTest extends Setup {
                 .file(file)
                 .build();
 
+        assertEquals(uploadImage.getPetId(), dogVictor.getId());
+
         UpdateResponsePOJO response = given()
                 .contentType("multipart/form-data")
                 .multiPart("file", uploadImage.getFile())
                 .formParam("additionalMetadata", uploadImage.getAdditionalMetadata())
                 .when()
-                .post("/pet/" + uploadImage.getPetId() + "/uploadImage")
+                .post(format("/pet/%s/uploadImage", uploadImage.getPetId()))
                 .then()
                 .extract().as(UpdateResponsePOJO.class);
 
-        assertEquals(uploadImage.getPetId(), dogVictor.getId());
         Assert.assertNotNull(response);
         Assert.assertTrue(response.getMessage().contains(uploadImage.getAdditionalMetadata()));
-
     }
 
     @Test(priority = 3)
@@ -83,7 +83,7 @@ public class PetAllTest extends Setup {
 
         PetPOJO pet = given()
                 .when()
-                .get("/pet/" + dogVictor.getId())
+                .get(format("/pet/%s", dogVictor.getId()))
                 .then()
                 .extract().body().as(PetPOJO.class);
 
@@ -122,7 +122,7 @@ public class PetAllTest extends Setup {
                 .body(update)
                 .contentType("application/x-www-form-urlencoded")
                 .when()
-                .post("/pet/" + dogVictor.getId())
+                .post(format("/pet/%s", dogVictor.getId()))
                 .then()
                 .extract().body().as(UpdateResponsePOJO.class);
 
@@ -135,7 +135,7 @@ public class PetAllTest extends Setup {
 
         UpdateResponsePOJO delete = given()
                 .when()
-                .delete("/pet/" + dogVictor.getId())
+                .delete(format("/pet/%s", dogVictor.getId()))
                 .then()
                 .extract().body().as(UpdateResponsePOJO.class);
 

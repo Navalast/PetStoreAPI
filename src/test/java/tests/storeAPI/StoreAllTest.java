@@ -13,13 +13,14 @@ import pojo.storePojo.OrderPOJO;
 import java.util.Date;
 
 import static io.restassured.RestAssured.given;
+import static java.lang.String.format;
 
 public class StoreAllTest extends Setup {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
     private Date date;
 
     private final OrderPOJO firstOrder = OrderPOJO.builder()
-            .id(10)
+            .id(121)
             .petId(4)
             .quantity(4)
             .shipDate(date)
@@ -40,6 +41,7 @@ public class StoreAllTest extends Setup {
 
         Assert.assertNotNull(response);
         Assert.assertEquals(firstOrder.getId(), response.getId());
+        Assert.assertEquals(firstOrder.getPetId(), response.getPetId());
     }
 
     @Test(priority = 2)
@@ -48,7 +50,7 @@ public class StoreAllTest extends Setup {
 
         OrderPOJO response = given()
                 .when()
-                .get("/store/order/" + firstOrder.getId())
+                .get(format("/store/order/%s", firstOrder.getId()))
                 .then()
                 .extract().body().as(OrderPOJO.class);
 
@@ -76,11 +78,11 @@ public class StoreAllTest extends Setup {
 
         DeleteResponsePOJO response = given()
                 .when()
-                .delete("/store/order/" + firstOrder.getId())
+                .delete(format("/store/order/%s", firstOrder.getId()))
                 .then()
                 .extract().body().as(DeleteResponsePOJO.class);
 
         Assert.assertNotNull(response);
-        Assert.assertEquals(response.getMessage(), "10");
+        Assert.assertEquals(response.getMessage(), firstOrder.getId().toString());
     }
 }
