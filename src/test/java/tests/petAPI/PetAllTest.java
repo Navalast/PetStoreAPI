@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 public class PetAllTest extends Setup {
 
     private final PetPOJO dogVictor = PetPOJO.builder()
-            .id(10)
+            .id(121)
             .category(CategoryPOJO.builder()
                     .id(2)
                     .name("BigDog")
@@ -87,9 +87,9 @@ public class PetAllTest extends Setup {
                 .then()
                 .extract().body().as(PetPOJO.class);
 
-        assertEquals(pet.getId().intValue(), 10);
-        assertEquals(pet.getName(), "Victor");
-        assertEquals(pet.getStatus(), "sleep");
+        assertEquals(pet.getId(), dogVictor.getId());
+        assertEquals(pet.getName(), dogVictor.getName());
+        assertEquals(pet.getStatus(), dogVictor.getStatus());
     }
 
     @Test(priority = 4)
@@ -113,7 +113,7 @@ public class PetAllTest extends Setup {
     public void postUpdatePetTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
         UpdatePetPOJO update = UpdatePetPOJO.builder()
-                .id(10)
+                .id(121)
                 .name("Alex")
                 .status("sleep")
                 .build();
