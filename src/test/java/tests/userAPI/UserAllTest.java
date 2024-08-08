@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 import pojo.userPojo.*;
 
 import java.math.BigInteger;
+import java.util.LinkedList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
@@ -24,6 +26,43 @@ public class UserAllTest extends Setup {
             .phone("98316516")
             .userStatus(21)
             .build();
+
+    private final UserPOJO userVictor = UserPOJO.builder()
+            .id(BigInteger.valueOf(3480872))
+            .username("Victor5000")
+            .firstName("Victor")
+            .lastName("Victorovich")
+            .email("mailemail@mail.ru")
+            .password("1337")
+            .phone("613216")
+            .userStatus(4)
+            .build();
+
+    @Test
+    public void createUserWithArrayTest() {
+        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
+
+        List<UserPOJO> userPOJOList = new LinkedList<>();
+        userPOJOList.add(userTony);
+        userPOJOList.add(userVictor);
+
+        Assert.assertEquals(userTony, userPOJOList.get(0));
+        Assert.assertEquals(userVictor, userPOJOList.get(1));
+
+        UserResponseBodyPOJO response = given()
+                .body(userPOJOList)
+                .when()
+                .post("/user/createWithArray")
+                .then()
+                .extract().as(UserResponseBodyPOJO.class);
+
+        String message = "ok";
+        String type = "unknown";
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(message, response.getMessage());
+        Assert.assertEquals(type, response.getType());
+    }
 
     @Test(priority = 1)
     public void createUserTest() {
