@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pojo.userPojo.*;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,11 +39,39 @@ public class UserAllTest extends Setup {
             .userStatus(4)
             .build();
 
-    @Test
+    private List<UserPOJO> userPOJOList;
+
+    @Test()
+    public void createUserWithListTest() {
+        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
+
+        userPOJOList = new LinkedList<>();
+        userPOJOList.add(userTony);
+        userPOJOList.add(userVictor);
+
+        Assert.assertEquals(userTony, userPOJOList.get(0));
+        Assert.assertEquals(userVictor, userPOJOList.get(1));
+
+        UserResponseBodyPOJO response = given()
+                .body(userPOJOList)
+                .when()
+                .post("/user/createWithArray")
+                .then()
+                .extract().as(UserResponseBodyPOJO.class);
+
+        String message = "ok";
+        String type = "unknown";
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(message, response.getMessage());
+        Assert.assertEquals(type, response.getType());
+    }
+
+    @Test()
     public void createUserWithArrayTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
-        List<UserPOJO> userPOJOList = new LinkedList<>();
+        userPOJOList = new ArrayList<>();
         userPOJOList.add(userTony);
         userPOJOList.add(userVictor);
 
