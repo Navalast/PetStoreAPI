@@ -3,6 +3,7 @@ package tests.storeAPI;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import confForTests.ResponseCode;
 import confForTests.Setup;
+import enumStatus.OrderStatusEnum;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -11,7 +12,12 @@ import pojo.storePojo.DeleteResponsePOJO;
 import pojo.storePojo.OrderPOJO;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static enumStatus.OrderStatusEnum.*;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 
@@ -19,12 +25,15 @@ public class StoreAllTest extends Setup {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
     private Date date;
 
+    private final List<OrderStatusEnum> orderStatusEnumList = Stream.of(PLACED, APPROVED, DELIVERED)
+            .collect(Collectors.toCollection(LinkedList::new));
+
     private final OrderPOJO firstOrder = OrderPOJO.builder()
             .id(121)
             .petId(4)
             .quantity(4)
             .shipDate(date)
-            .status("placed")
+            .status(String.valueOf(orderStatusEnumList.get(0)).toLowerCase())
             .complete(true)
             .build();
 

@@ -2,7 +2,7 @@ package tests.petAPI;
 
 import confForTests.ResponseCode;
 import confForTests.Setup;
-import enumStatus.StatusEnum;
+import enumStatus.PetStatusEnum;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static enumStatus.StatusEnum.*;
+import static enumStatus.PetStatusEnum.*;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
@@ -38,8 +38,24 @@ public class PetAllTest extends Setup {
                             .id(4)
                             .name("secondTag")
                             .build()))
-            .status(String.valueOf(available))
+            .status(String.valueOf(PENDING).toLowerCase())
             .build();
+
+    @Test
+    public void getPetFindByStatusTest() {
+        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
+
+        List<PetStatusEnum> listOfStatus = Stream.of(AVAILABLE, PENDING, SOLD)
+                .collect(Collectors.toCollection(LinkedList::new));
+
+        List<PetPOJO> response = given()
+                .when()
+                .get(format("/pet/findByStatus?status=%s", listOfStatus.get(2).toString().toLowerCase()))
+                .then()
+                .extract().body().jsonPath().getList(".", PetPOJO.class);
+
+        response.forEach(pet -> assertEquals(pet.getStatus(), listOfStatus.get(2).toString().toLowerCase()));
+    }
 
     @Test(priority = 1)
     public void postCreatePetTest() {
@@ -134,22 +150,6 @@ public class PetAllTest extends Setup {
                 .extract().body().as(UpdateResponsePOJO.class);
 
         assertEquals(pet.getMessage(), update.getId().toString());
-    }
-
-    @Test
-    public void getPetFindByStatusTest() {
-        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
-
-        List<StatusEnum> listOfStatus = Stream.of(available, pending, sold)
-                .collect(Collectors.toCollection(LinkedList::new));
-
-        List<PetPOJO> response = given()
-                .when()
-                .get(format("/pet/findByStatus?status=%s", listOfStatus.get(0).toString()))
-                .then()
-                .extract().body().jsonPath().getList(".", PetPOJO.class);
-
-        response.forEach(pet -> assertEquals(pet.getStatus(), listOfStatus.get(0).toString().toLowerCase()));
     }
 
     @Test(priority = 6)
