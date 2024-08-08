@@ -3,7 +3,6 @@ package tests.storeAPI;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import confForTests.ResponseCode;
 import confForTests.Setup;
-import enumStatus.OrderStatusEnum;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -13,12 +12,8 @@ import pojo.storePojo.OrderPOJO;
 
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static enumStatus.OrderStatusEnum.*;
+import static enumStatus.OrderStatusEnum.PLACED;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 
@@ -26,15 +21,12 @@ public class StoreAllTest extends Setup {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
     private Date date;
 
-    private final List<OrderStatusEnum> orderStatusEnumList = Stream.of(PLACED, APPROVED, DELIVERED)
-            .collect(Collectors.toCollection(LinkedList::new));
-
     private final OrderPOJO firstOrder = OrderPOJO.builder()
             .id(BigInteger.valueOf(1219872))
             .petId(BigInteger.valueOf(1219872))
             .quantity(BigInteger.valueOf(4))
             .shipDate(date)
-            .status(String.valueOf(orderStatusEnumList.get(0)).toLowerCase())
+            .status(PLACED.toString().toLowerCase())
             .complete(true)
             .build();
 
@@ -55,6 +47,19 @@ public class StoreAllTest extends Setup {
     }
 
     @Test(priority = 2)
+    public void getOrderInventoryTest() {
+        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
+
+        Response response = given()
+                .when()
+                .get("/store/inventory")
+                .then()
+                .extract().response();
+
+        Assert.assertNotNull(response);
+    }
+
+    @Test(priority = 3)
     public void getOrderOnIdTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -67,19 +72,6 @@ public class StoreAllTest extends Setup {
         Assert.assertNotNull(response);
         Assert.assertEquals(firstOrder.getId(), response.getId());
         Assert.assertEquals(firstOrder.getPetId(), response.getPetId());
-    }
-
-    @Test(priority = 3)
-    public void getOrderInventoryTest() {
-        RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
-
-        Response response = given()
-                .when()
-                .get("/store/inventory")
-                .then()
-                .extract().response();
-
-        Assert.assertNotNull(response);
     }
 
     @Test(priority = 4)
