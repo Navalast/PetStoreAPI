@@ -23,19 +23,19 @@ import static org.testng.Assert.assertEquals;
 public class PetAllTest extends Setup {
 
     private final PetPOJO dogVictor = PetPOJO.builder()
-            .id(BigInteger.valueOf(121))
+            .id(BigInteger.valueOf(1219872))
             .category(CategoryPOJO.builder()
-                    .id(2)
+                    .id(BigInteger.valueOf(2))
                     .name("BigDog")
                     .build())
             .name("Victor")
             .photoUrls(List.of("Link1", "Link2"))
             .tags(List.of(TagPOJO.builder()
-                    .id(3)
+                    .id(BigInteger.valueOf(3))
                     .name("firstTag")
                     .build(),
                     TagPOJO.builder()
-                            .id(4)
+                            .id(BigInteger.valueOf(4))
                             .name("secondTag")
                             .build()))
             .status(String.valueOf(PENDING).toLowerCase())
@@ -136,7 +136,7 @@ public class PetAllTest extends Setup {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
         UpdatePetPOJO update = UpdatePetPOJO.builder()
-                .id(121)
+                .id(dogVictor.getId())
                 .name("Alex")
                 .status("sleep")
                 .build();

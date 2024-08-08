@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigInteger;
+
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 @EqualsAndHashCode(callSuper = true)
@@ -17,11 +19,11 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @NoArgsConstructor
 public class UpdateUserPOJO extends GetUserPOJO {
 
-    Integer id;
+    BigInteger id;
     String firstName;
     String lastName;
     String email;
     String password;
     String phone;
-    Integer userStatus;
+    BigInteger userStatus;
 }

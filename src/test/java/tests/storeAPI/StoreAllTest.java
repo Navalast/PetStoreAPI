@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import pojo.storePojo.DeleteResponsePOJO;
 import pojo.storePojo.OrderPOJO;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,9 +30,9 @@ public class StoreAllTest extends Setup {
             .collect(Collectors.toCollection(LinkedList::new));
 
     private final OrderPOJO firstOrder = OrderPOJO.builder()
-            .id(121)
-            .petId(4)
-            .quantity(4)
+            .id(BigInteger.valueOf(1219872))
+            .petId(BigInteger.valueOf(1219872))
+            .quantity(BigInteger.valueOf(4))
             .shipDate(date)
             .status(String.valueOf(orderStatusEnumList.get(0)).toLowerCase())
             .complete(true)

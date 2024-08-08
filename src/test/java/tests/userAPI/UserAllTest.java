@@ -7,13 +7,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pojo.userPojo.*;
 
+import java.math.BigInteger;
+
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 
 public class UserAllTest extends Setup {
 
     private final UserPOJO userTony = UserPOJO.builder()
-            .id(121)
+            .id(BigInteger.valueOf(1219872))
             .username("Krasavec")
             .firstName("Tony")
             .lastName("Krasavkovich")
@@ -95,7 +97,7 @@ public class UserAllTest extends Setup {
                 .email(userTony.getEmail())
                 .password(userTony.getPassword())
                 .phone(userTony.getPhone())
-                .userStatus(userTony.getUserStatus())
+                .userStatus(BigInteger.valueOf(userTony.getUserStatus()))
                 .build();
 
         UserResponseBodyPOJO response = given()
