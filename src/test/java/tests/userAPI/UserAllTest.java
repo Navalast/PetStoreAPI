@@ -2,6 +2,8 @@ package tests.userAPI;
 
 import confForTests.ResponseCode;
 import confForTests.Setup;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -42,6 +44,7 @@ public class UserAllTest extends Setup {
     private List<UserPOJO> userPOJOList;
 
     @Test()
+    @Description("post-запрос. Создать список пользователей используя LinkedList")
     public void createUserWithListTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -68,6 +71,7 @@ public class UserAllTest extends Setup {
     }
 
     @Test()
+    @Description("post-запрос. Создать список пользователей используя ArrayList")
     public void createUserWithArrayTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -94,6 +98,7 @@ public class UserAllTest extends Setup {
     }
 
     @Test(priority = 1)
+    @Description("post-запрос. Создать пользователя")
     public void createUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -110,6 +115,7 @@ public class UserAllTest extends Setup {
     }
 
     @Test(priority = 2)
+    @Description("get-запрос. Авторизировать пользователя")
     public void getUserLoginTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -133,6 +139,7 @@ public class UserAllTest extends Setup {
     }
 
     @Test(priority = 3)
+    @Description("get-запрос. Найти пользователя по имени")
     public void getUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -154,6 +161,7 @@ public class UserAllTest extends Setup {
     }
 
     @Test(priority = 4)
+    @Description("put-запрос. Обновить данные о пользователе")
     public void updateUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -180,6 +188,7 @@ public class UserAllTest extends Setup {
     }
 
     @Test(priority = 5)
+    @Description("delete-запрос. Удалить пользователя")
     public void deleteUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 

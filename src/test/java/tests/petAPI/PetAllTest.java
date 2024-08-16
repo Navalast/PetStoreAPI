@@ -3,6 +3,8 @@ package tests.petAPI;
 import confForTests.ResponseCode;
 import confForTests.Setup;
 import enumStatus.PetStatusEnum;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -31,9 +33,9 @@ public class PetAllTest extends Setup {
             .name("Victor")
             .photoUrls(List.of("Link1", "Link2"))
             .tags(List.of(TagPOJO.builder()
-                    .id(BigInteger.valueOf(3))
-                    .name("firstTag")
-                    .build(),
+                            .id(BigInteger.valueOf(3))
+                            .name("firstTag")
+                            .build(),
                     TagPOJO.builder()
                             .id(BigInteger.valueOf(4))
                             .name("secondTag")
@@ -42,6 +44,7 @@ public class PetAllTest extends Setup {
             .build();
 
     @Test
+    @Description("get-запрос. Найти животное по статусу")
     public void getPetFindByStatusTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -58,6 +61,7 @@ public class PetAllTest extends Setup {
     }
 
     @Test(priority = 1)
+    @Description("post-запрос. Создать животное")
     public void postCreatePetTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -74,6 +78,7 @@ public class PetAllTest extends Setup {
     }
 
     @Test(priority = 2)
+    @Description("post-запрос. Загрузить картинку животному по id")
     public void postUploadImageTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -100,6 +105,7 @@ public class PetAllTest extends Setup {
     }
 
     @Test(priority = 3)
+    @Description("get-запрос. Найти животное по id")
     public void getFindPetByIdTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -115,6 +121,7 @@ public class PetAllTest extends Setup {
     }
 
     @Test(priority = 4)
+    @Description("put-запрос. Обновить данные о животном")
     public void putUpdatePetTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -132,6 +139,7 @@ public class PetAllTest extends Setup {
     }
 
     @Test(priority = 5)
+    @Description("post-запрос. Обновить данные о животном")
     public void postUpdatePetTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -153,6 +161,7 @@ public class PetAllTest extends Setup {
     }
 
     @Test(priority = 6)
+    @Description("delete-запрос. Удалить животное из списка")
     public void deleteTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 

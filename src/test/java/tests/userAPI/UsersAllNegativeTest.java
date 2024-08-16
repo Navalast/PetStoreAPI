@@ -2,6 +2,8 @@ package tests.userAPI;
 
 import confForTests.ResponseCode;
 import confForTests.Setup;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,6 +17,7 @@ public class UsersAllNegativeTest extends Setup {
     private final String body = "";
 
     @Test(priority = 1)
+    @Description("Неудачная попытка создать юзера с целым числом вместо тела, получение ошибки 500")
     public void negativeCreateUserTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(500);
 
@@ -33,6 +36,7 @@ public class UsersAllNegativeTest extends Setup {
     }
 
     @Test(priority = 2)
+    @Description("Неудачная попытка создать юзера с пустым телом, получение ошибки 405")
     public void negativeCreateUser2Test() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(405);
 
@@ -52,6 +56,7 @@ public class UsersAllNegativeTest extends Setup {
     }
 
     @Test(priority = 3)
+    @Description("Неудачная попытка создать юзера, использование неправильный endpoint получение ошибки 405")
     public void negativeCreateUser3Test() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(405);
 

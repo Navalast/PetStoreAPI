@@ -3,6 +3,8 @@ package tests.storeAPI;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import confForTests.ResponseCode;
 import confForTests.Setup;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -18,6 +20,7 @@ import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 
 public class StoreAllTest extends Setup {
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
     private Date date;
 
@@ -31,6 +34,7 @@ public class StoreAllTest extends Setup {
             .build();
 
     @Test(priority = 1)
+    @Description("post-запрос. Создать заказ")
     public void postStoreTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -47,6 +51,7 @@ public class StoreAllTest extends Setup {
     }
 
     @Test(priority = 2)
+    @Description("get-запрос. Получить инвентарь заказов")
     public void getOrderInventoryTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -60,6 +65,7 @@ public class StoreAllTest extends Setup {
     }
 
     @Test(priority = 3)
+    @Description("get-запрос. Найти заказ по id")
     public void getOrderOnIdTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
@@ -75,6 +81,7 @@ public class StoreAllTest extends Setup {
     }
 
     @Test(priority = 4)
+    @Description("delete-запрос. Удалить заказ по id")
     public void deleteTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 

@@ -3,6 +3,8 @@ package tests.kafka;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import confForTests.ResponseCode;
 import confForTests.Setup;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import kafka.KafkaConsumerHelper;
 import kafka.KafkaProducerHelper;
@@ -42,6 +44,7 @@ public class KafkaTest extends Setup {
             .build();
 
     @Test(priority = 1)
+    @Description("post-запрос. Создания заказа, взаимодействие с кафка с Kafka")
     public void postStoreTest() {
         RestAssured.responseSpecification = ResponseCode.resSpecUnique(200);
 
