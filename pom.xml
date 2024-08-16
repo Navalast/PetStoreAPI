@@ -28,6 +28,11 @@
             <artifactId>jackson-annotations</artifactId>
             <version>2.17.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_3</artifactId>
+            <version>2.17.2</version>
+        </dependency>
 
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -96,11 +101,28 @@
             <artifactId>kafka-clients</artifactId>
             <version>3.8.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-streams</artifactId>
             <version>3.8.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.13</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+
+        <!-- Зависимость для тестирования Kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <version>3.2.2</version>
+            <scope>test</scope>
+        </dependency>
+
+
 
 
     </dependencies>
